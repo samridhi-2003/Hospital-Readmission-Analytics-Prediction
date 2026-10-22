@@ -1,6 +1,14 @@
 
 # Hospital Readmission Analytics & Prediction System
 
+
+## Live Demo
+
+🚀 **Try the Hospital Readmission Analytics & Prediction System:**
+
+[Click Here to Open Live Application](https://hospital-readmission-analytics-prediction-7sy2bgz8fcpuagv7fwf5.streamlit.app)
+
+
 ## Project Overview
 An end-to-end Data Analytics and Machine Learning project
 that analyzes hospital readmissions and estimates the
