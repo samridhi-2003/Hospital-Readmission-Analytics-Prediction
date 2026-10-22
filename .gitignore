@@ -41,3 +41,7 @@ models/*.joblib
 # Hospital Dataset
 data/hospital_cleaned.csv
 data/IDS_mapping.csv
+
+# Original and backup hospital datasets
+data/diabetic_data.csv
+data/hospital_cleaned_backup.csv
