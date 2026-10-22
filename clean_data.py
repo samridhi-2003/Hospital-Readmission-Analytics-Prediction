@@ -1,4 +1,5 @@
-
+from urllib.request import urlretrieve
+from zipfile import ZipFile
 import pandas as pd
 from pathlib import Path
 
@@ -6,7 +7,25 @@ BASE_DIR = Path(__file__).resolve().parent
 DATA_DIR = BASE_DIR / "data"
 
 input_file = DATA_DIR / "diabetic_data.csv"
-output_file = DATA_DIR / "hospital_cleaned_test.csv"
+
+if not input_file.exists():
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+
+    url = "https://archive.ics.uci.edu/static/public/296/diabetes+130-us+hospitals+for+years+1999-2008.zip"
+    zip_path = DATA_DIR / "diabetes_dataset.zip"
+
+    print("Downloading dataset...")
+    urlretrieve(url, zip_path)
+
+    with ZipFile(zip_path, "r") as zip_file:
+        with zip_file.open("diabetic_data.csv") as source:
+            with open(input_file, "wb") as destination:
+                destination.write(source.read())
+
+    zip_path.unlink()
+    print("Dataset downloaded successfully!")
+
+output_file = DATA_DIR / "hospital_cleaned.csv"
 
 if not input_file.exists():
     print("Original dataset not found!")

@@ -1,3 +1,5 @@
+import subprocess
+import sys
 import joblib
 import plotly.express as px
 import streamlit as st
@@ -11,6 +13,34 @@ st.set_page_config(
 )
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
+
+PROJECT_DIR = Path(__file__).resolve().parent.parent
+
+def prepare_dataset():
+
+    dataset_path = DATA_DIR / "hospital_cleaned.csv"
+
+    if not dataset_path.exists():
+        with st.spinner("Preparing hospital dataset..."):
+            subprocess.run(
+                [sys.executable, str(PROJECT_DIR / "clean_data.py")],
+                check=True,
+                cwd=PROJECT_DIR
+            )
+def prepare_model():
+    model_path = PROJECT_DIR / "models" / "random_forest_model.pkl"
+
+    if not model_path.exists():
+        with st.spinner("Training prediction model... This may take a few minutes."):
+            subprocess.run(
+                [sys.executable, str(PROJECT_DIR / "train_model.py")],
+                check=True,
+                cwd=PROJECT_DIR
+            )
+
+
+prepare_dataset()
+prepare_model()
 
 
 @st.cache_data
