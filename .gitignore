@@ -1,0 +1,43 @@
+
+# Python Cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual Environment
+venv/
+.venv/
+env/
+
+# Environment Variables and Secrets
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+*.pem
+*.key
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Temporary Files
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+
+# IDE Settings
+.vscode/
+.idea/
+
+# Local Model Files
+models/*.pkl
+models/*.joblib
+
+# Local Database Files
+*.sqlite
+*.db
+
+# Hospital Dataset
+data/hospital_cleaned.csv
+data/IDS_mapping.csv
