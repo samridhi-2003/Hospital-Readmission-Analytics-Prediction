@@ -16,17 +16,23 @@ DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 
 PROJECT_DIR = Path(__file__).resolve().parent.parent
 
-def prepare_dataset():
 
+def prepare_dataset():
     dataset_path = DATA_DIR / "hospital_cleaned.csv"
 
     if not dataset_path.exists():
         with st.spinner("Preparing hospital dataset..."):
-            subprocess.run(
+            result = subprocess.run(
                 [sys.executable, str(PROJECT_DIR / "clean_data.py")],
-                check=True,
+                capture_output=True,
+                text=True,
                 cwd=PROJECT_DIR
             )
+
+            if result.returncode != 0:
+                st.error("Dataset preparation failed.")
+                st.code(result.stderr or result.stdout)
+                st.stop()
 def prepare_model():
     model_path = PROJECT_DIR / "models" / "random_forest_model.pkl"
 
